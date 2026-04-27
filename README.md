@@ -24,5 +24,8 @@ An AI-powered document intelligence platform that allows users to upload PDFs, n
 - Multi-language Support
 - Team Collaboration
 
+## Live Demo
+https://doc-mind-ai-iota.vercel.app/
+
 ## Author
 Poja Shri J M
