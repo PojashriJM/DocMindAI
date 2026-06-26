@@ -440,7 +440,12 @@ darkMode
 >
           {currentChat?.messages.length === 0 ? (
             <p className="text-gray-400">
-              Hi, Welcome to DocMind AI. Upload a PDF or start chatting...
+              Hi, Welcome to DocMind AI. Upload a PDF or start chatting... <br />Steps to get Started: <br />
+              1. Choose a file  <br />
+2. Click Upload  <br />
+3. Ask a question  <br />
+4. Click Send  <br />
+5. Enjoy your learning journey with DocMind AI. <br />
             </p>
           ) : (
             currentChat?.messages.map(
