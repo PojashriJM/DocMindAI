@@ -252,12 +252,19 @@ No extra text.
   const handleNextQuestion = () => {
     const current = quizQuestions[currentQuestion];
 
-    const selectedIndex = current.options.indexOf(selectedOption);
-    const selectedLetter = ["A", "B", "C", "D"][selectedIndex] || "";
-    const correctLetter = current.answer.trim().charAt(0).toUpperCase();
-    const isCorrect = selectedLetter === correctLetter;
-    const correctIndex = ["A", "B", "C", "D"].indexOf(correctLetter);
-    const correctText = current.options[correctIndex] || current.answer;
+    // Some generated quizzes prefix options with "A) ", others don't, and the
+    // "answer" field sometimes comes back as a letter and sometimes as the
+    // plain value. Stripping any leading "X) " and comparing text directly
+    // avoids relying on a specific format from the model.
+    const normalize = (s: string) => s.replace(/^[A-D]\)\s*/i, "").trim().toLowerCase();
+
+    const normalizedAnswer = normalize(current.answer);
+    const correctText =
+      current.options.find((opt) => normalize(opt) === normalizedAnswer) ||
+      current.answer;
+
+    const isCorrect =
+      !!selectedOption && normalize(selectedOption) === normalizedAnswer;
 
     const newReview = [
       ...reviewAnswers,
